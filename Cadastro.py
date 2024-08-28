@@ -7,9 +7,11 @@ def gravar_dados(nome, data_nasc, tipo):
     
     if not data_nasc or data_nasc > date.today():
         erros.append("Por favor, data de nascimento inválida.")
-    
+           
     if not nome:
         erros.append("Por favor, preencha o nome.")
+    elif ',' in nome:
+        erros.append("O nome não pode conter vírgulas.")    
     
     if erros:
         st.session_state["sucesso"] = False
