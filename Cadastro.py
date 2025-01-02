@@ -2,16 +2,26 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 
-def gravar_dados(nome, data_nasc, tipo):          
+def gravar_dados(nome, tipo_combustivel,valor, Posto, TotalAbastecimento):          
     erros = []
     
-    if not data_nasc or data_nasc > date.today():
-        erros.append("Por favor, data de nascimento inválida.")
-           
+#    if not data_nasc or data_nasc > date.today():
+        #erros.append("Por favor, data de nascimento inválida.")
+    
     if not nome:
         erros.append("Por favor, preencha o nome.")
-    elif ',' in nome:
-        erros.append("O nome não pode conter vírgulas.")    
+
+    if not tipo_combustivel:
+        erros.append("Por favor, preencha o tipode combustivel.")
+
+    if not valor:
+        erros.append("Por favor, preencha o valor por litro.")
+        
+    if not Posto:
+        erros.append("Por favor, preencha o nome do posto.")        
+        
+    if not TotalAbastecimento:
+        erros.append("Por favor, preencha o valor total do abastecimento.")                     
     
     if erros:
         st.session_state["sucesso"] = False
@@ -30,12 +40,16 @@ st.title("Cadastro de Clientes")
 st.divider()
 
 nome = st.text_input("Digite o nome do Cliente", key="nome_cliente")
-dt_nasc = st.date_input("Data de Nascimento", format="DD/MM/YYYY")
-tipo = st.selectbox("Tipo do Cliente", ["Pessoa Física", "Pessoa Jurídica"])
+#dt_nasc = st.date_input("Data de Nascimento", format="DD/MM/YYYY")
+tipo_combustivel = st.selectbox("Tipo do Combustivel", ["Alcool", "Gasolina"])
+valor = st.text_input("Digite o Valor do litro?")
+Posto = st.text_input("Qual o posto?")
+TotalAbastecimento = st.text_input("Digite o Valor Total do abastecimento?")
+
 
 btn_Cadastrar = st.button("Cadastrar",
                           on_click=gravar_dados,
-                          args=[nome, dt_nasc, tipo])
+                          args=[nome, tipo_combustivel,valor, Posto, TotalAbastecimento])
 
 if "sucesso" in st.session_state:
     if st.session_state["sucesso"]:
