@@ -39,7 +39,7 @@ st.set_page_config(
 st.title("Cadastro de Clientes")
 st.divider()
 
-DATAS = st.date_input("Data de Nascimento", format="DD/MM/YYYY")
+DATAS = st.date_input("Data do Abastecimento", format="DD/MM/YYYY")
 tipo_combustivel = st.selectbox("Tipo do Combustivel", ["Alcool", "Gasolina"])
 valor = st.text_input("Digite o Valor do litro?")
 Posto = st.text_input("Qual o posto?")
