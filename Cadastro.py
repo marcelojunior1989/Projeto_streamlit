@@ -36,7 +36,7 @@ st.set_page_config(
     page_icon="🙎"
 )
 
-st.title("Cadastro de Clientes")
+st.title("Cadastro de Abastecimento")
 st.divider()
 
 DATAS = st.date_input("Data do Abastecimento", format="DD/MM/YYYY")
