@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 from datetime import date
 
-def gravar_dados(nome, tipo_combustivel,valor, Posto, TotalAbastecimento):          
+def gravar_dados(DATAS,tipo_combustivel,valor, Posto, TotalAbastecimento):          
     erros = []
     
-#    if not data_nasc or data_nasc > date.today():
-        #erros.append("Por favor, data de nascimento inválida.")
+    if not DATAS or DATAS > date.today():
+        erros.append("Por favor, DATA inválida.")
     
-    if not nome:
-        erros.append("Por favor, preencha o nome.")
+#    if not nome:
+#        erros.append("Por favor, preencha o nome.")
 
     if not tipo_combustivel:
         erros.append("Por favor, preencha o tipode combustivel.")
@@ -28,7 +28,7 @@ def gravar_dados(nome, tipo_combustivel,valor, Posto, TotalAbastecimento):
         st.error("\n".join(erros))
     else:
         with open("clientes.csv", "a", encoding="utf-8") as file:
-            file.write(f"{nome},{data_nasc},{tipo}\n")
+            file.write(f"{nome},{DATA},{tipo}\n")
         st.session_state["sucesso"] = True
 
 st.set_page_config(
@@ -39,8 +39,7 @@ st.set_page_config(
 st.title("Cadastro de Clientes")
 st.divider()
 
-nome = st.text_input("Digite o nome do Cliente", key="nome_cliente")
-#dt_nasc = st.date_input("Data de Nascimento", format="DD/MM/YYYY")
+DATAS = st.date_input("Data de Nascimento", format="DD/MM/YYYY")
 tipo_combustivel = st.selectbox("Tipo do Combustivel", ["Alcool", "Gasolina"])
 valor = st.text_input("Digite o Valor do litro?")
 Posto = st.text_input("Qual o posto?")
@@ -49,7 +48,7 @@ TotalAbastecimento = st.text_input("Digite o Valor Total do abastecimento?")
 
 btn_Cadastrar = st.button("Cadastrar",
                           on_click=gravar_dados,
-                          args=[nome, tipo_combustivel,valor, Posto, TotalAbastecimento])
+                          args=[DATAS, tipo_combustivel,valor, Posto, TotalAbastecimento])
 
 if "sucesso" in st.session_state:
     if st.session_state["sucesso"]:
