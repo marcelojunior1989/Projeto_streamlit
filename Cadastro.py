@@ -28,7 +28,7 @@ def gravar_dados(DATAS,tipo_combustivel,valor, Posto, TotalAbastecimento):
         st.error("\n".join(erros))
     else:
         with open("clientes.csv", "a", encoding="utf-8") as file:
-            file.write(f"{nome},{DATA},{tipo}\n")
+            file.write(f"{DATAS},{tipo_combustivel},{valor},{Posto},{TotalAbastecimento}\n")
         st.session_state["sucesso"] = True
 
 st.set_page_config(
